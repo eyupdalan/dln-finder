@@ -102,3 +102,24 @@
 - Hazırlanan rest api'yi uygun şekilde çağıracak bir web uygulaması hazırlanmıştır.
 - Bir React framework'ü olan Next.js kullanılmıştır.
 - Api çağrılarak sonuçlar uygun şekilde gösterilmektedir.
+
+## Performans metrikleri
+
+- Hazırlanan 6 sorgu için sonuçlar değerlendirildi (`relevance_labels.csv`):
+  - orman yangınları
+  - abd'de orman yangını
+  - enflasyon oranı açıklandı
+  - deprem oldu mu
+  - şampiyon kim oldu
+  - süper lig şampiyonu
+
+- Buna göre ortalama metrikler aşağıdaki gibi:
+Ortalama Metrikler:
+precision      0.550000
+recall         1.000000
+f1_score       0.704715
+precision@5    0.800000
+recall@5       0.730159
+
+- Grafiği de şu şekilde:
+![Performance Metrics](performance_metrics.png)
