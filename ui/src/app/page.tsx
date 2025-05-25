@@ -53,80 +53,99 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="max-w-3xl w-full mx-auto p-6 space-y-6">
-        <h1 className="text-3xl font-bold text-center">dln finder</h1>
+    <div className="min-h-screen flex flex-col items-center justify-start pt-20">
+      <div className="max-w-3xl w-full mx-auto p-6 space-y-8">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold text-blue-600 mb-2">dln finder</h1>
+          <p className="text-gray-600">Web Madenciliği Projesi</p>
+        </div>
 
-        <div className="space-y-4">
-          <input
-            type="text"
-            placeholder="Arama sorgusu"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full p-2 border rounded"
-          />
+        <div className="space-y-6">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Arama sorgusu"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="w-full p-4 pr-12 text-lg border rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onKeyPress={(e) => e.key === 'Enter' && handleSearch(1)}
+            />
+            <button
+              onClick={() => handleSearch(1)}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+            >
+              {loading ? 'Aranıyor...' : 'Ara'}
+            </button>
+          </div>
 
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-semibold">α (BM25)</label>
-              <input
-                type="number"
-                step="0.01"
-                min="0"
-                max="1"
-                value={alpha}
-                onChange={(e) => setAlpha(parseFloat(e.target.value))}
-                className="w-full p-1 border rounded"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold">β (PageRank)</label>
-              <input
-                type="number"
-                step="0.01"
-                min="0"
-                max="1"
-                value={beta}
-                onChange={(e) => setBeta(parseFloat(e.target.value))}
-                className="w-full p-1 border rounded"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold">γ (HITS)</label>
-              <input
-                type="number"
-                step="0.01"
-                min="0"
-                max="1"
-                value={gamma}
-                onChange={(e) => setGamma(parseFloat(e.target.value))}
-                className="w-full p-1 border rounded"
-              />
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <h2 className="text-lg font-semibold mb-3">Arama Ağırlıkları</h2>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">α (BM25)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  max="1"
+                  value={alpha}
+                  onChange={(e) => setAlpha(parseFloat(e.target.value))}
+                  className="mt-1 w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">β (PageRank)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  max="1"
+                  value={beta}
+                  onChange={(e) => setBeta(parseFloat(e.target.value))}
+                  className="mt-1 w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">γ (HITS)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  max="1"
+                  value={gamma}
+                  onChange={(e) => setGamma(parseFloat(e.target.value))}
+                  className="mt-1 w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
             </div>
           </div>
 
-          <button
-            onClick={() => handleSearch(1)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          >
-            {loading ? 'Aranıyor...' : 'Ara'}
-          </button>
-
-          {error && <p className="text-red-500">{error}</p>}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <span className="block sm:inline">{error}</span>
+            </div>
+          )}
         </div>
 
         <div className="space-y-3">
           {results.map((result) => (
-            <div key={result.doc_id} className="p-4 border rounded hover:shadow">
-              <p className="text-sm text-gray-500">Skor: {result.score.toFixed(4)}</p>
-              <a
-                href={result.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg font-semibold text-blue-700 hover:underline"
-              >
-                {result.title || result.url}
-              </a>
+            <div key={result.doc_id} className="p-4 hover:bg-gray-50">
+              <div className="flex flex-col space-y-1">
+                <a
+                  href={result.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xl text-blue-800 hover:underline"
+                >
+                  {result.title || result.url}
+                </a>
+                <p className="text-sm text-green-700 truncate">
+                  {result.url}
+                </p>
+                <p className="text-sm text-gray-600">
+                  Skor: {result.score.toFixed(4)}
+                </p>
+              </div>
             </div>
           ))}
         </div>
