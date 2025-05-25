@@ -210,6 +210,9 @@ export default function SearchPage() {
                       <p className="text-sm text-gray-600">
                         Skor: {result.score.toFixed(4)}
                       </p>
+                      <p className="text-sm text-gray-500">
+                        Doküman ID: {result.doc_id}
+                      </p>
                     </div>
                   </div>
                 ))}
