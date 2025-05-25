@@ -103,8 +103,15 @@ Bu proje, web sayfalarından veri çekme, metin işleme ve arama algoritmaları 
 ```bash
 pip install -r requirements.txt
 ```
+2. UI için paketlerin yüklenmesi
+Makinede "node" ve "yarn" yüklü olmalı
+```bash
+cd ui 
+yarn install
+```
 
-2. Projeyi çalıştırın:
+3. Projeyi çalıştırın:
+Öncesinde `ui` dizininde olduğundan emin olunmalıdır.
 ```bash
 ./run.sh
 ```
