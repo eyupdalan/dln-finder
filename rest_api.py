@@ -1,6 +1,7 @@
 from bm25_implementation import compute_bm25, normalize
 from config import DB_CONFIG
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import psycopg2
 import numpy as np
 from collections import defaultdict
@@ -8,6 +9,13 @@ from collections import defaultdict
 from text_preprocessing import preprocess_text
 
 app = Flask(__name__)
+CORS(app, resources={
+    r"/*": {
+        "origins": ["http://localhost:3000"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)
