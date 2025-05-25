@@ -123,3 +123,9 @@ recall@5       0.730159
 
 - Grafiği de şu şekilde:
 ![Performance Metrics](performance_metrics.png)
+
+- Buna göre, web sayfalarındaki;
+  - Gereksiz link'ler
+  - "visible" olmayan html elementleri içine gömülü metinler
+  - otomatik üretilmiş web sayfaları
+  aramaları etkiliyor.
