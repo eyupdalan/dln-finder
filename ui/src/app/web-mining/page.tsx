@@ -127,7 +127,7 @@ export default function SearchPage() {
             <div className="w-full max-w-3xl px-4 flex flex-col items-center space-y-8">
               <div className="text-center">
                 <Logo size="large" />
-                <p className="text-gray-500 font-medium">Gelişmiş Web Madenciliği Modülü</p>
+                <p className="text-gray-500 font-medium">Web Madenciliği Dersi 2025</p>
               </div>
               
               <div className="w-full bg-white p-8 rounded-3xl shadow-xl border border-gray-100/50">

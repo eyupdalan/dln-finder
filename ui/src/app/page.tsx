@@ -125,6 +125,7 @@ export default function Home() {
 
             <div className="w-full max-w-2xl px-4 flex flex-col items-center">
               <Logo size="large" />
+              <p className="text-gray-500 font-medium mb-8">Doğal Dil İşlemeye Kavramsal Bakış Dersi 2026</p>
               
               <div className="w-full relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full opacity-20 group-hover:opacity-40 blur transition duration-500"></div>
