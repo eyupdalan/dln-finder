@@ -33,7 +33,7 @@ export default function Home() {
       setCurrentPage(res.data.pagination.current_page)
       setTotalPages(res.data.pagination.total_pages)
     } catch (err: any) {
-      setError(err?.response?.data?.error || 'Bir hata oluştu')
+      setError(err?.response?.data?.error || 'An error occurred')
       setResults([])
     }
     setLoading(false)
@@ -81,7 +81,7 @@ export default function Home() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   className="block w-full pl-11 pr-12 py-2.5 bg-white border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm hover:shadow-md"
-                  placeholder="Web'de arayın..."
+                  placeholder="Search the web..."
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch(1)}
                 />
                 <button
@@ -125,7 +125,7 @@ export default function Home() {
 
             <div className="w-full max-w-2xl px-4 flex flex-col items-center">
               <Logo size="large" />
-              <p className="text-gray-500 font-medium mb-8">Doğal Dil İşlemeye Kavramsal Bakış Dersi 2026</p>
+              <p className="text-gray-500 font-medium mb-8">Conceptual View of Natural Language Processing Course 2026</p>
               
               <div className="w-full relative group">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full opacity-20 group-hover:opacity-40 blur transition duration-500"></div>
@@ -140,7 +140,7 @@ export default function Home() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="block w-full pl-14 pr-32 py-4 bg-white border border-gray-100 rounded-full text-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-0 shadow-lg group-hover:shadow-xl transition-all"
-                    placeholder="Web'de arayın..."
+                    placeholder="Search the web..."
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch(1)}
                   />
                   <div className="absolute right-2 top-1/2 -translate-y-1/2">
@@ -148,7 +148,7 @@ export default function Home() {
                       onClick={() => handleSearch(1)}
                       className="bg-indigo-600 text-white px-6 py-2.5 rounded-full hover:bg-indigo-700 font-medium transition-all shadow-md hover:shadow-lg active:scale-95 flex items-center gap-2"
                     >
-                      {loading ? '...' : 'Ara'}
+                      {loading ? '...' : 'Search'}
                     </button>
                   </div>
                 </div>
@@ -197,11 +197,11 @@ export default function Home() {
                       rel="noopener noreferrer"
                       className="text-xl font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors leading-tight block"
                     >
-                      {result.title || "Adsız Doküman"}
+                      {result.title || "Untitled Document"}
                     </a>
                     
                     <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
-                      Bu sonuç, arama sorgunuzla yüksek oranda eşleşen içerik barındırmaktadır. Detaylı bilgi için bağlantıyı ziyaret edebilirsiniz.
+                      This result contains content highly matching your search query. You can visit the link for detailed information.
                     </p>
                   </div>
                 </div>

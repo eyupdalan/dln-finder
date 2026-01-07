@@ -24,7 +24,7 @@ export default function SearchPage() {
 
   const handleSearch = async (page = 1) => {
     if (Math.abs(alpha + beta + gamma - 1.0) > 1e-5) {
-      setError('α + β + γ toplamı 1 olmalıdır.')
+      setError('Sum of α + β + γ must be 1.')
       return
     }
 
@@ -39,7 +39,7 @@ export default function SearchPage() {
       setCurrentPage(res.data.pagination.current_page)
       setTotalPages(res.data.pagination.total_pages)
     } catch (err: any) {
-      setError(err?.response?.data?.error || 'Bir hata oluştu')
+      setError(err?.response?.data?.error || 'An error occurred')
       setResults([])
     }
     setLoading(false)
@@ -82,7 +82,7 @@ export default function SearchPage() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   className="block w-full pl-5 pr-12 py-2.5 bg-white border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all shadow-sm hover:shadow-md"
-                  placeholder="Gelişmiş arama..."
+                  placeholder="Advanced search..."
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch(1)}
                 />
                 <button
@@ -104,7 +104,7 @@ export default function SearchPage() {
 
               <div className="hidden sm:block">
                  <Link href="/" className="text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors px-3 py-2 rounded-lg hover:bg-indigo-50">
-                   Ana Sayfa
+                   Home
                  </Link>
               </div>
             </div>
@@ -120,14 +120,14 @@ export default function SearchPage() {
           <div className="flex-1 flex flex-col items-center justify-center -mt-10 animate-in fade-in zoom-in duration-500">
              <div className="absolute top-6 right-6">
               <Link href="/" className="text-sm font-medium text-gray-500 hover:text-indigo-600 transition-colors px-4 py-2 rounded-full hover:bg-white/80 hover:shadow-sm">
-                Ana Sayfa
+                Home
               </Link>
             </div>
 
             <div className="w-full max-w-3xl px-4 flex flex-col items-center space-y-8">
               <div className="text-center">
                 <Logo size="large" />
-                <p className="text-gray-500 font-medium">Web Madenciliği Dersi 2025</p>
+                <p className="text-gray-500 font-medium">Web Mining Course 2025</p>
               </div>
               
               <div className="w-full bg-white p-8 rounded-3xl shadow-xl border border-gray-100/50">
@@ -137,7 +137,7 @@ export default function SearchPage() {
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       className="block w-full px-6 py-4 bg-slate-50 border border-gray-200 rounded-2xl text-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
-                      placeholder="Analiz edilecek terimleri girin..."
+                      placeholder="Enter terms to analyze..."
                       onKeyPress={(e) => e.key === 'Enter' && handleSearch(1)}
                     />
                  </div>
@@ -168,9 +168,9 @@ export default function SearchPage() {
                     className="w-full bg-indigo-600 text-white py-4 rounded-xl font-semibold hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl active:scale-[0.99] flex items-center justify-center gap-2"
                   >
                     {loading ? (
-                       <span>Analiz Ediliyor...</span>
+                       <span>Analyzing...</span>
                     ) : (
-                       <span>Analizi Başlat</span>
+                       <span>Start Analysis</span>
                     )}
                   </button>
 
@@ -216,7 +216,7 @@ export default function SearchPage() {
                       rel="noopener noreferrer"
                       className="text-xl font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors leading-tight block"
                     >
-                      {result.title || "Adsız Doküman"}
+                      {result.title || "Untitled Document"}
                     </a>
                     
                     <div className="flex gap-4 text-xs text-gray-400 font-mono mt-2">
