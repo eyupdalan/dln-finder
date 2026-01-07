@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Add web-mining directory to sys.path to allow imports from moved files
+sys.path.append(os.path.join(os.path.dirname(__file__), 'web-mining'))
+
 from bm25_implementation import compute_bm25, normalize
 from config import DB_CONFIG
 from flask import Flask, request, jsonify
