@@ -92,6 +92,11 @@ export default function SearchPage() {
                   </button>
                 </div>
               </div>
+              <div className="ml-auto">
+                 <a href="/" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+                   Ana Sayfa
+                 </a>
+              </div>
             </div>
           </div>
         </div>
@@ -101,6 +106,11 @@ export default function SearchPage() {
         {results.length === 0 && (
           <div className="py-12">
             <div className="text-center mb-12">
+              <div className="flex justify-end absolute top-4 right-4 sm:top-6 sm:right-6">
+                 <a href="/" className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+                   Ana Sayfa
+                 </a>
+              </div>
               <div className="flex items-center justify-center mb-4">
                 <svg width="400" height="80" viewBox="0 0 400 80" className="mb-2">
                   <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="text-5xl font-bold tracking-tight" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif' }}>
