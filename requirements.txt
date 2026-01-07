@@ -2,7 +2,7 @@ beautifulsoup4==4.12.3
 flask==3.0.2
 flask-cors==4.0.0
 matplotlib==3.8.3
-networkx==3.3
+networkx==3.2.1
 nltk==3.9.1
 numpy==1.26.4
 pandas==2.2.3
@@ -11,4 +11,5 @@ requests==2.32.3
 scikit-learn==1.5.1
 seaborn==0.13.2
 tqdm==4.66.5
-warcio==1.7.5 
+warcio==1.7.5
+python-dotenv 
