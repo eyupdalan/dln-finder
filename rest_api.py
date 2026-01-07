@@ -1,4 +1,5 @@
 import sys
+# Trigger reload
 import os
 
 # Add web-mining directory to sys.path to allow imports from moved files
@@ -32,6 +33,69 @@ def are_you_alive():
 
 @app.route("/search", methods=["GET"])
 def search():
+    query = request.args.get("query")
+    page = int(request.args.get("page", 1))
+    per_page = 10
+
+    if not query:
+        return jsonify({"error": "Query parametresi gerekli."}), 400
+
+    if page < 1:
+        return jsonify({"error": "Sayfa numarası 1'den küçük olamaz."}), 400
+
+    conn = get_db_connection()
+    query_tokens = preprocess_text(query)
+    bm25_results = compute_bm25(query_tokens, conn)
+    bm25_dict = dict(bm25_results) # doc_id -> score
+    doc_ids = tuple(bm25_dict.keys())
+
+    if not doc_ids:
+        conn.close()
+        return jsonify({"results": [], "pagination": {"current_page": page, "total_pages": 0, "total_results": 0, "per_page": per_page}})
+
+    cursor = conn.cursor()
+    # Title ve URL
+    cursor.execute(
+        f"SELECT id, url, title FROM pages WHERE id IN %s;",
+        (doc_ids,)
+    )
+    doc_meta = {row[0]: {"url": row[1], "title": row[2]} for row in cursor.fetchall()}
+    cursor.close()
+    conn.close()
+
+    # Results list
+    search_results = []
+    for doc_id, score in bm25_dict.items():
+        search_results.append({
+            "doc_id": doc_id,
+            "score": score,
+            "url": doc_meta.get(doc_id, {}).get("url"),
+            "title": doc_meta.get(doc_id, {}).get("title")
+        })
+
+    search_results.sort(key=lambda x: x["score"], reverse=True)
+
+    # Pagination
+    start_idx = (page - 1) * per_page
+    end_idx = start_idx + per_page
+    total_results = len(search_results)
+    total_pages = (total_results + per_page - 1) // per_page
+
+    paginated_results = search_results[start_idx:end_idx]
+
+    return jsonify({
+        "results": paginated_results,
+        "pagination": {
+            "current_page": page,
+            "total_pages": total_pages,
+            "total_results": total_results,
+            "per_page": per_page
+        }
+    })
+
+
+@app.route("/advanced-search", methods=["GET"])
+def advanced_search():
     query = request.args.get("query")
     alpha = float(request.args.get("alpha", 0.6))
     beta = float(request.args.get("beta", 0.3))

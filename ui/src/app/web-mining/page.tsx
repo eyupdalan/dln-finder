@@ -30,7 +30,7 @@ export default function SearchPage() {
     setLoading(true)
     setError('')
     try {
-      const res = await axios.get('http://localhost:3001/search', {
+      const res = await axios.get('http://localhost:3001/advanced-search', {
         params: { query, alpha, beta, gamma, page }
       })
 
